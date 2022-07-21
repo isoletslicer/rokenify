@@ -5,17 +5,14 @@ let trayOfInput = {};
 function startCheckup() {
   let usia = document.getElementById("usia").value;
   let isAktifMerokok = document.getElementById("is-aktif-merokok").value;
-  let isJenisPerokok = document.getElementById("is-jenis-perokok").value;
   let isOlahraga = document.getElementById("is-olahraga").value;
   console.log(usia);
   console.log(isAktifMerokok);
-  console.log(isJenisPerokok);
   console.log(isOlahraga);
 
   trayOfInput = {
     usia: usia,
     isAktifMerokok: isAktifMerokok,
-    isJenisPerokok: isJenisPerokok,
     isOlahraga: isOlahraga,
   };
   // console.log(usia);
@@ -87,19 +84,244 @@ function resetCount() {
 // 5-10 = kalau perokok => return id: strong-lungs & message: "Paru-paru kamu sehat tuh"
 // 5-10 = tidak olahraga => return id: do-more-sports & message: "Ayuk olahraga"
 
-// {"usia":"12","isAktifMerokok":"aktif","isJenisPerokok":"batangan","isOlahraga":"iya"}
+// {"usia":"12","isAktifMerokok":"aktif","isOlahraga":"iya"}
+
+// !TODO : KONEKSIKAN KE QUERYTRAY AGAR WORKS
+
+const { usia, isAktif, isOlahraga } = queryTray;
+
+const valueOfAvg = document.getElementById("avg");
+
+// !TODO : TOLONG JADIIN INI  FUNCTION UTK RETURN KATEGOTI
+let kategori = "";
+
+if (valueOfAvg) {
+  if (valueOfAvg.innerText < 2) {
+    kategori = "weak-lungs";
+  } else if (valueOfAvg.innerText < 5) {
+    kategori = "normal-lungs";
+  } else if (valueOfAvg.innerText < 10) {
+    kategori = "strong-lungs";
+  }
+}
+
+// TODO : COBA KAITIN INI KE DOM HTML NYA. PNJNG EMANG
+
+if (Number(usia) < 18) {
+  if (
+    isAktif === "aktif" &&
+    isOlahraga === "iya" &&
+    valueOfAvg === "weak-lungs"
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "weak-lungs");
+    newEntryResult.innerText = "belajar dulu yang bener, jangan ngerokok terus";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "aktif" &&
+    isOlahraga === "iya" &&
+    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "not-weak-lungs");
+    newEntryResult.innerText = "kurang2in rokok dek, kamu belum lulus SMA";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "aktif" &&
+    isOlahraga === "tidak" &&
+    valueOfAvg === "weak-lungs"
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "weak-lungs");
+    newEntryResult.innerText =
+      "belajar dulu yang bener, biar bisa kerja dan bayar biaya RS";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "aktif" &&
+    isOlahraga === "tidak" &&
+    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "not-weak-lungs");
+    newEntryResult.innerText =
+      "kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "pasif" &&
+    isOlahraga === "iya" &&
+    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "not-weak-lungs");
+    newEntryResult.innerText = "selamat pola hidupmu sehat, masa depan cerah";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "pasif" &&
+    isOlahraga === "iya" &&
+    valueOfAvg === "weak-lungs"
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "weak-lungs");
+    newEntryResult.innerText = "banyakin olahraga, biar paru2mu kuat dek";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "pasif" &&
+    isOlahraga === "tidak" &&
+    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "not-weak-lungs");
+    newEntryResult.innerText =
+      "pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "pasif" &&
+    isOlahraga === "tidak" &&
+    valueOfAvg === "weak-lungs"
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "weak-lungs");
+    newEntryResult.innerText =
+      "olahraga dek, jangan main epep terus (kasih foto ambarita polisi)";
+    dariHTML.appendChild(newEntryResult);
+  }
+}
+
+if (Number(usia) > 18) {
+  if (
+    isAktif === "aktif" &&
+    isOlahraga === "iya" &&
+    valueOfAvg === "weak-lungs"
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "weak-lungs");
+    newEntryResult.innerText =
+      "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "aktif" &&
+    isOlahraga === "iya" &&
+    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "not-weak-lungs");
+    newEntryResult.innerText = `olahraga tidak mengurangi resiko merokok. \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "aktif" &&
+    isOlahraga === "tidak" &&
+    valueOfAvg === "weak-lungs"
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "weak-lungs");
+    newEntryResult.innerText =
+      "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "aktif" &&
+    isOlahraga === "tidak" &&
+    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "not-weak-lungs");
+    newEntryResult.innerText = `anda dikaruniai paru2 bagus, tetapi \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "pasif" &&
+    isOlahraga === "iya" &&
+    valueOfAvg === "weak-lungs"
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "weak-lungs");
+    newEntryResult.innerText = "banyakin olahraga, biar paru2mu kuat!";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "pasif" &&
+    isOlahraga === "iya" &&
+    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "not-weak-lungs");
+    newEntryResult.innerText = "selamat pola hidupmu sehat,semoga umur panjang";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "pasif" &&
+    isOlahraga === "tidak" &&
+    valueOfAvg === "weak-lungs"
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "weak-lungs");
+    newEntryResult.innerText =
+      "banyakin olahraga bos biar dapat jodoh, umur gaada yang tau!";
+    dariHTML.appendChild(newEntryResult);
+  }
+
+  if (
+    isAktif === "pasif" &&
+    isOlahraga === "tidak" &&
+    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  ) {
+    let dariHTML = document.getElementById("result-final");
+    let newEntryResult = document.createElement("div");
+    newEntryResult.setAttribute("id", "not-weak-lungs");
+    newEntryResult.innerText =
+      "anda dikaruniai paru2 bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram";
+    dariHTML.appendChild(newEntryResult);
+  }
+}
 
 // kondisi:
 // USIA < 18
 // perokok && sport && weak => 'belajar dulu yang bener, jangan ngerokok terus'
-// perokok && non-sport && weak => 'belajar dulu yang bener, biar bisa kerja dan bayar biaya RS'
 // perokok && sport && normal/strong => 'kurang2in rokok dek, kamu belum lulus SMA'
-// perokok && non-sport && normal/strong => 'kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga'
+// perokok && non-sport && weak => 'belajar dulu yang bener, biar bisa kerja dan bayar biaya RS'
+// perokok && non-sport && normal/strong => 'kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga' -CLEAR
 
 // bukan perokok && sport && normal/strong => 'selamat pola hidupmu sehat, masa depan cerah'
 // bukan perokok && sport && weak => 'banyakin olahraga, biar paru2mu kuat dek!'
 // bukan perokok && non-sport && weak => 'olahraga dek, jangan main epep terus (kasih foto ambarita polisi)'
-// bukan perokok && non-sport && normal/strong => 'pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik'
+// bukan perokok && non-sport && normal/strong => 'pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik' -CLEAR
 
 // USIA > 18
 // perokok && sport && weak => 'merokok dapat menyebabkan (tretan muslim)'
