@@ -27,3 +27,9 @@ p {
   font-size: medium;
   color: grey;
 }
+
+.text_homepage {
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: small;
+}
