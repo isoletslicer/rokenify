@@ -1,3 +1,10 @@
+// Function untuk dapat input
+
+function startCheckup() {
+  let usia = document.getElementById("usia").value;
+  // console.log(usia);
+}
+
 // Function untuk counter waktu
 var c = 0;
 var t;
