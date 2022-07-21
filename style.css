@@ -1,6 +1,15 @@
+h1 {
+  color: #022867;
+  font-size: 36pt;
+}
+
 p {
   color: black;
   font-size: 16pt;
+}
+
+button {
+  font-size: 18pt;
 }
 
 .container {
@@ -15,4 +24,14 @@ p {
 
 .text-justify {
   text-align: justify;
+}
+
+/* Ini style progress bar */
+#myBar {
+  width: 10%;
+  height: 30px;
+  background-color: #04aa6d;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
 }
