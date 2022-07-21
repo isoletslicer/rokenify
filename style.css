@@ -29,10 +29,11 @@ button {
 .pertanyaan-judul {
   text-align: justify;
   font-size: medium;
+  color: black;
 }
 
 .dropdown-judul {
   text-align: justify;
   font-size: medium;
-  color: grey;
+  color: black;
 }
