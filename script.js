@@ -20,7 +20,7 @@ function startCheckup() {
   localStorage.setItem("trayOfInput", JSON.stringify(trayOfInput));
 
   // SET THE VALUE TO OUR LOGIC IN JS IF WE WANT TO USE SCRIPT ON IT
-  let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
+  // let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
 
   return trayOfInput;
 }
@@ -30,9 +30,8 @@ console.log(startCheckup());
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 // parsing aja
 // SET THE VALUE TO OUR LOGIC IN JS IF WE WANT TO USE SCRIPT ON IT
-let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
+// let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
 
-console.log(queryTray);
 // Function untuk counter waktu
 var c = 0;
 var t;
@@ -52,6 +51,8 @@ function doTimer() {
 }
 
 let data = [];
+let sum = 0;
+let totalAverage = 0;
 
 function stopCount() {
   clearTimeout(t);
@@ -62,9 +63,12 @@ function stopCount() {
 
   for (let i = 0; i < data.length; i++) {
     if (data[i]) {
-      let sum = data.reduce((partialSum, a) => partialSum + a, 0);
+      sum = data.reduce((partialSum, a) => partialSum + a, 0);
       document.getElementById(`time-${i}`).innerText = data[i];
-      document.getElementById("avg").innerText = (sum / data.length).toFixed(2);
+      // let totalAverage = sum / data.length;
+      // document.getElementById("avg").innerText = totalAverage.toFixed(2);
+      totalAverage = sum / data.length;
+      document.getElementById("avg").innerText = totalAverage.toFixed(2);
     }
   }
 }
@@ -88,227 +92,230 @@ function resetCount() {
 
 // !TODO : KONEKSIKAN KE QUERYTRAY AGAR WORKS
 
-const { usia, isAktif, isOlahraga } = queryTray;
+const { usia, isAktifMerokok, isOlahraga } = trayOfInput;
 
-const valueOfAvg = document.getElementById("avg");
+let getUsia = trayOfInput.usia;
+let getAktifMerokok = trayOfInput.isAktifMerokok;
+let getOlahraga = trayOfInput.isOlahraga;
 
+console.log(totalAverage);
+console.log(typeof totalAverage);
 // !TODO : TOLONG JADIIN INI  FUNCTION UTK RETURN KATEGOTI
 let kategori = "";
 
-if (valueOfAvg) {
-  if (valueOfAvg.innerText < 2) {
-    kategori = "weak-lungs";
-  } else if (valueOfAvg.innerText < 5) {
-    kategori = "normal-lungs";
-  } else if (valueOfAvg.innerText < 10) {
-    kategori = "strong-lungs";
-  }
+if (totalAverage < 20) {
+  console.log("masuk nih terkecil kategori");
+  kategori = "weak-lungs";
+} else if (totalAverage < 50) {
+  kategori = "normal-lungs";
+} else if (totalAverage < 100) {
+  kategori = "strong-lungs";
 }
+
+console.log(kategori);
 
 // TODO : COBA KAITIN INI KE DOM HTML NYA. PNJNG EMANG
 
-if (Number(usia) < 18) {
+if (Number(getUsia) < 18) {
   if (
-    isAktif === "aktif" &&
-    isOlahraga === "iya" &&
-    valueOfAvg === "weak-lungs"
+    getAktifMerokok === "aktif" &&
+    getOlahraga === "iya" &&
+    kategori === "weak-lungs"
   ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "weak-lungs");
-    newEntryResult.innerText = "belajar dulu yang bener, jangan ngerokok terus";
-    dariHTML.appendChild(newEntryResult);
+    let dariHTML = document.getElementById("summary-result");
+    dariHTML.innerText = "belajar dulu yang bener, jangan ngerokok terus";
+    // dariHTML.appendChild(newEntryResult);
   }
 
-  if (
-    isAktif === "aktif" &&
-    isOlahraga === "iya" &&
-    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "not-weak-lungs");
-    newEntryResult.innerText = "kurang2in rokok dek, kamu belum lulus SMA";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "aktif" &&
+  //     isOlahraga === "iya" &&
+  //     (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "not-weak-lungs");
+  //     newEntryResult.innerText = "kurang2in rokok dek, kamu belum lulus SMA";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "aktif" &&
-    isOlahraga === "tidak" &&
-    valueOfAvg === "weak-lungs"
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "weak-lungs");
-    newEntryResult.innerText =
-      "belajar dulu yang bener, biar bisa kerja dan bayar biaya RS";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "aktif" &&
+  //     isOlahraga === "tidak" &&
+  //     valueOfAvg === "weak-lungs"
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "weak-lungs");
+  //     newEntryResult.innerText =
+  //       "belajar dulu yang bener, biar bisa kerja dan bayar biaya RS";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "aktif" &&
-    isOlahraga === "tidak" &&
-    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "not-weak-lungs");
-    newEntryResult.innerText =
-      "kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "aktif" &&
+  //     isOlahraga === "tidak" &&
+  //     (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "not-weak-lungs");
+  //     newEntryResult.innerText =
+  //       "kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "pasif" &&
-    isOlahraga === "iya" &&
-    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "not-weak-lungs");
-    newEntryResult.innerText = "selamat pola hidupmu sehat, masa depan cerah";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "pasif" &&
+  //     isOlahraga === "iya" &&
+  //     (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "not-weak-lungs");
+  //     newEntryResult.innerText = "selamat pola hidupmu sehat, masa depan cerah";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "pasif" &&
-    isOlahraga === "iya" &&
-    valueOfAvg === "weak-lungs"
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "weak-lungs");
-    newEntryResult.innerText = "banyakin olahraga, biar paru2mu kuat dek";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "pasif" &&
+  //     isOlahraga === "iya" &&
+  //     valueOfAvg === "weak-lungs"
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "weak-lungs");
+  //     newEntryResult.innerText = "banyakin olahraga, biar paru2mu kuat dek";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "pasif" &&
-    isOlahraga === "tidak" &&
-    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "not-weak-lungs");
-    newEntryResult.innerText =
-      "pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "pasif" &&
+  //     isOlahraga === "tidak" &&
+  //     (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "not-weak-lungs");
+  //     newEntryResult.innerText =
+  //       "pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "pasif" &&
-    isOlahraga === "tidak" &&
-    valueOfAvg === "weak-lungs"
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "weak-lungs");
-    newEntryResult.innerText =
-      "olahraga dek, jangan main epep terus (kasih foto ambarita polisi)";
-    dariHTML.appendChild(newEntryResult);
-  }
-}
+  //   if (
+  //     isAktif === "pasif" &&
+  //     isOlahraga === "tidak" &&
+  //     valueOfAvg === "weak-lungs"
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "weak-lungs");
+  //     newEntryResult.innerText =
+  //       "olahraga dek, jangan main epep terus (kasih foto ambarita polisi)";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
+  // }
 
-if (Number(usia) > 18) {
-  if (
-    isAktif === "aktif" &&
-    isOlahraga === "iya" &&
-    valueOfAvg === "weak-lungs"
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "weak-lungs");
-    newEntryResult.innerText =
-      "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
-    dariHTML.appendChild(newEntryResult);
-  }
+  // if (Number(usia) > 18) {
+  //   if (
+  //     isAktif === "aktif" &&
+  //     isOlahraga === "iya" &&
+  //     valueOfAvg === "weak-lungs"
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "weak-lungs");
+  //     newEntryResult.innerText =
+  //       "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "aktif" &&
-    isOlahraga === "iya" &&
-    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "not-weak-lungs");
-    newEntryResult.innerText = `olahraga tidak mengurangi resiko merokok. \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "aktif" &&
+  //     isOlahraga === "iya" &&
+  //     (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "not-weak-lungs");
+  //     newEntryResult.innerText = `olahraga tidak mengurangi resiko merokok. \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "aktif" &&
-    isOlahraga === "tidak" &&
-    valueOfAvg === "weak-lungs"
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "weak-lungs");
-    newEntryResult.innerText =
-      "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "aktif" &&
+  //     isOlahraga === "tidak" &&
+  //     valueOfAvg === "weak-lungs"
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "weak-lungs");
+  //     newEntryResult.innerText =
+  //       "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "aktif" &&
-    isOlahraga === "tidak" &&
-    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "not-weak-lungs");
-    newEntryResult.innerText = `anda dikaruniai paru2 bagus, tetapi \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "aktif" &&
+  //     isOlahraga === "tidak" &&
+  //     (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "not-weak-lungs");
+  //     newEntryResult.innerText = `anda dikaruniai paru2 bagus, tetapi \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "pasif" &&
-    isOlahraga === "iya" &&
-    valueOfAvg === "weak-lungs"
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "weak-lungs");
-    newEntryResult.innerText = "banyakin olahraga, biar paru2mu kuat!";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "pasif" &&
+  //     isOlahraga === "iya" &&
+  //     valueOfAvg === "weak-lungs"
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "weak-lungs");
+  //     newEntryResult.innerText = "banyakin olahraga, biar paru2mu kuat!";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "pasif" &&
-    isOlahraga === "iya" &&
-    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "not-weak-lungs");
-    newEntryResult.innerText = "selamat pola hidupmu sehat,semoga umur panjang";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "pasif" &&
+  //     isOlahraga === "iya" &&
+  //     (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "not-weak-lungs");
+  //     newEntryResult.innerText = "selamat pola hidupmu sehat,semoga umur panjang";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "pasif" &&
-    isOlahraga === "tidak" &&
-    valueOfAvg === "weak-lungs"
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "weak-lungs");
-    newEntryResult.innerText =
-      "banyakin olahraga bos biar dapat jodoh, umur gaada yang tau!";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "pasif" &&
+  //     isOlahraga === "tidak" &&
+  //     valueOfAvg === "weak-lungs"
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "weak-lungs");
+  //     newEntryResult.innerText =
+  //       "banyakin olahraga bos biar dapat jodoh, umur gaada yang tau!";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 
-  if (
-    isAktif === "pasif" &&
-    isOlahraga === "tidak" &&
-    (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
-  ) {
-    let dariHTML = document.getElementById("result-final");
-    let newEntryResult = document.createElement("div");
-    newEntryResult.setAttribute("id", "not-weak-lungs");
-    newEntryResult.innerText =
-      "anda dikaruniai paru2 bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram";
-    dariHTML.appendChild(newEntryResult);
-  }
+  //   if (
+  //     isAktif === "pasif" &&
+  //     isOlahraga === "tidak" &&
+  //     (valueOfAvg === "normal-lungs" || valueOfAvg === "strong-lungs")
+  //   ) {
+  //     let dariHTML = document.getElementById("result-final");
+  //     let newEntryResult = document.createElement("div");
+  //     newEntryResult.setAttribute("id", "not-weak-lungs");
+  //     newEntryResult.innerText =
+  //       "anda dikaruniai paru2 bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram";
+  //     dariHTML.appendChild(newEntryResult);
+  //   }
 }
 
 // kondisi:
