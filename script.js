@@ -76,3 +76,38 @@ function resetCount() {
   c = 0;
   document.getElementById("txt").value = c;
 }
+
+// Kategori:
+// 0-2 = kalau perokok => return id: weak-lungs & message: "Dikurangi rokoknya ya guys"
+// 0-2 = tidak olahraga => return id: do-more-sports & message: "Ayuk olahraga "
+
+// 2-5 = kalau perokok => return id: normal-lungs & message: "Dikurangi rokoknya ya guys"
+// 2-5 = tidak olahraga => return id: do-more-sports & message: "Ayuk olahraga "
+
+// 5-10 = kalau perokok => return id: strong-lungs & message: "Paru-paru kamu sehat tuh"
+// 5-10 = tidak olahraga => return id: do-more-sports & message: "Ayuk olahraga"
+
+// {"usia":"12","isAktifMerokok":"aktif","isJenisPerokok":"batangan","isOlahraga":"iya"}
+
+// kondisi:
+// USIA < 18
+// perokok && sport && weak => 'belajar dulu yang bener, jangan ngerokok terus'
+// perokok && non-sport && weak => 'belajar dulu yang bener, biar bisa kerja dan bayar biaya RS'
+// perokok && sport && normal/strong => 'kurang2in rokok dek, kamu belum lulus SMA'
+// perokok && non-sport && normal/strong => 'kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga'
+
+// bukan perokok && sport && normal/strong => 'selamat pola hidupmu sehat, masa depan cerah'
+// bukan perokok && sport && weak => 'banyakin olahraga, biar paru2mu kuat dek!'
+// bukan perokok && non-sport && weak => 'olahraga dek, jangan main epep terus (kasih foto ambarita polisi)'
+// bukan perokok && non-sport && normal/strong => 'pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik'
+
+// USIA > 18
+// perokok && sport && weak => 'merokok dapat menyebabkan (tretan muslim)'
+// perokok && non-sport && weak => 'merokok dapat menyebabkan (tretan muslim)'
+// perokok && sport && normal/strong => 'olahraga tidak mengurangi resiko merokok (tretan muslim)'
+// perokok && non-sport && normal/strong => 'anda dikaruniai paru2 bagus, tetapi merokok dapat dapat menyebabkan (tretan muslim)'
+
+// bukan perokok && sport && normal/strong => 'selamat pola hidupmu sehat,semoga umur panjang'
+// bukan perokok && sport && weak => 'banyakin olahraga, biar paru2mu kuat!'
+// bukan perokok && non-sport && weak => 'banyakin olahraga bos biar dapat jodoh, umur gaada yang tau!'
+// bukan perokok && non-sport && normal/strong => 'anda dikaruniai paru2 bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram'
