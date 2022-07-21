@@ -1,6 +1,15 @@
+h1 {
+  color: #022867;
+  font-size: 36pt;
+}
+
 p {
   color: black;
   font-size: 16pt;
+}
+
+button {
+  font-size: 18pt;
 }
 
 .container {
@@ -20,16 +29,11 @@ p {
 .pertanyaan-judul {
   text-align: justify;
   font-size: medium;
+  color: black;
 }
 
 .dropdown-judul {
   text-align: justify;
   font-size: medium;
-  color: grey;
-}
-
-.text_homepage {
-  text-align: justify;
-  text-justify: inter-word;
-  font-size: small;
+  color: black;
 }
