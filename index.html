@@ -95,25 +95,26 @@
       </div>
 
       <h4 class="pertanyaan-judul">Apakah kamu seorang perokok aktif atau pasif?</h4>
-      <select class="form-select" aria-label="Disabled select example">Mohon pilih salah satu!
-        <option class="dropdown-judul" >Mohon pilih salah satu!</option>
+      <select id ="is-aktif-merokok" class="form-select" aria-label="Disabled select example">
+        <option selected>Mohon pilih salah satu</option>
         <option value="aktif">Aktif</option>
-        <option value="Pasif">Pasif</option>
+        <option value="pasif">Pasif</option>
       </select>
 
       <br>
       <h4 class="pertanyaan-judul">Apakah kamu mengkonsumsi rokok batangan atau vape?</h4>
-      <select class="form-select" aria-label="Disabled select example">
-        <option class="dropdown-judul">Mohon pilih salah satu!</option>
+      <select id= "is-jenis-perokok"class="form-select" aria-label="Disabled select example">
+        <option selected>Pilh bukan perokok apabila kamu perokok pasif</option>
         <option value="batangan">Rokok batangan</option>
-        <option value="Vape">Vape</option>
+        <option value="vape">Vape</option>
+        <option value="not-perokok">Bukan Perokok</option>
       </select>
 
       <h4 class="pertanyaan-judul">Apakah kamu suka olahraga?</h4>
-      <select class="form-select" aria-label="Disabled select example">
-        <option class="dropdown-judul">Mohon pilih salah satu!</option>
+      <select id= "is-olahraga" class="form-select" aria-label="Disabled select example">
+        <option selected>Pilih salah satu</option>
         <option value="iya">Iya</option>
-        <option value="Tidak">Tidak</option>
+        <option value="tidak">Tidak</option>
       </select>
 
     <a class="btn btn-danger" onclick="startCheckup()"> Submit & Go! </a>
@@ -183,7 +184,8 @@
     <!-- /Tes-Paru-Paru -->
 
     <script src="./script.js">
-      // // cara masukin object ke dalam localstorage
+      // cara masukin object ke dalam localstorage
+      // ! JANGAN DIHAPUS
       // let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       // localStorage.setItem("arr", JSON.stringify(arr));
       // // parsing aja
