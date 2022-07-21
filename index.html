@@ -91,11 +91,11 @@
     <form>
       <div class="mb-3">
         <label for="usia" class="form-label">Usia</label>
-        <input type="email" class="form-control" id="usia" />
+        <input type="number" class="form-control" id="usia" />
       </div>
 
       <h4 class="pertanyaan-judul">Apakah kamu seorang perokok aktif atau pasif?</h4>
-      <select class="form-select" aria-label="Disabled select example">
+      <select class="form-select" aria-label="Disabled select example">Mohon pilih salah satu!
         <option class="dropdown-judul" >Mohon pilih salah satu!</option>
         <option value="aktif">Aktif</option>
         <option value="Pasif">Pasif</option>
@@ -123,7 +123,7 @@
       </ul>
     </div>
 
-    <a class="btn btn-danger"> Submit & Go! </a>
+    <a class="btn btn-danger" onclick="startCheckup()"> Submit & Go! </a>
   </div>
     <!-- /Isi-Identitas-->
 
