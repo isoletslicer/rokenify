@@ -94,25 +94,18 @@
         <input type="number" class="form-control" id="usia" />
       </div>
 
+      <br>
       <h4 class="pertanyaan-judul">Apakah kamu seorang perokok aktif atau pasif?</h4>
       <select id ="is-aktif-merokok" class="form-select" aria-label="Disabled select example">
-        <option selected>Mohon pilih salah satu</option>
+        <option selected>Mohon pilih pasif jika anda non-perokok</option>
         <option value="aktif">Aktif</option>
         <option value="pasif">Pasif</option>
       </select>
 
       <br>
-      <h4 class="pertanyaan-judul">Apakah kamu mengkonsumsi rokok batangan atau vape?</h4>
-      <select id= "is-jenis-perokok"class="form-select" aria-label="Disabled select example">
-        <option selected>Pilh bukan perokok apabila kamu perokok pasif</option>
-        <option value="batangan">Rokok batangan</option>
-        <option value="vape">Vape</option>
-        <option value="not-perokok">Bukan Perokok</option>
-      </select>
-
       <h4 class="pertanyaan-judul">Apakah kamu suka olahraga?</h4>
       <select id= "is-olahraga" class="form-select" aria-label="Disabled select example">
-        <option selected>Pilih salah satu</option>
+        <option selected>Pilih yang jujur ya, kalo bohong berdosa</option>
         <option value="iya">Iya</option>
         <option value="tidak">Tidak</option>
       </select>
@@ -182,6 +175,17 @@
        <button type="button" class="btn btn-danger btn-circle btn-lg reset-button" onclick="resetCount()">Reset</button>
 
     <!-- /Tes-Paru-Paru -->
+
+
+    <!-- hasil -->
+      <section class = "result-all" id = "result-final">
+
+        
+      </section>
+
+
+    <!-- /hasil -->
+
 
     <script src="./script.js">
       // cara masukin object ke dalam localstorage
