@@ -16,3 +16,14 @@ p {
 .text-justify {
   text-align: justify;
 }
+
+.pertanyaan-judul {
+  text-align: justify;
+  font-size: medium;
+}
+
+.dropdown-judul {
+  text-align: justify;
+  font-size: medium;
+  color: grey;
+}
