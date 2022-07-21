@@ -26,12 +26,13 @@ button {
   text-align: justify;
 }
 
-/* Ini style progress bar */
-#myBar {
-  width: 10%;
-  height: 30px;
-  background-color: #04aa6d;
-  text-align: center; /* To center it horizontally (if you want) */
-  line-height: 30px; /* To center it vertically */
-  color: white;
+.pertanyaan-judul {
+  text-align: justify;
+  font-size: medium;
+}
+
+.dropdown-judul {
+  text-align: justify;
+  font-size: medium;
+  color: grey;
 }
