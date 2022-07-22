@@ -11,6 +11,15 @@ function changePage(id) {
 }
 
 // Function untuk dapat input
+let isiUsia = false;
+
+function cekUsia() {
+  if (document.getElementById("usia").value === "") {
+    alert("Isi dulu bosku");
+  } else {
+    isiUsia = true;
+  }
+}
 
 let trayOfInput = {};
 let getUsia = "",
@@ -18,38 +27,44 @@ let getUsia = "",
   getOlahraga = "";
 
 function startCheckup() {
-  changePage("data-diri");
+  isiUsia = true;
 
-  let usia = document.getElementById("usia").value;
-  let isAktifMerokok = document.getElementById("is-aktif-merokok").value;
-  let isOlahraga = document.getElementById("is-olahraga").value;
+  if (isiUsia) {
+    changePage("data-diri");
 
-  // coba
-  if (isAktifMerokok === "aktif") {
-    getAktifMerokok = true;
-  } else {
-    getAktifMerokok = false;
+    let usia = document.getElementById("usia").value;
+    let isAktifMerokok = document.getElementById("is-aktif-merokok").value;
+    let isOlahraga = document.getElementById("is-olahraga").value;
+
+    if (isAktifMerokok === "aktif") {
+      getAktifMerokok = true;
+    } else {
+      getAktifMerokok = false;
+    }
+
+    if (isOlahraga === "iya") {
+      getOlahraga = true;
+    } else {
+      getOlahraga = false;
+    }
+
+    getUsia = usia;
+
+    console.log(usia);
+    console.log(isAktifMerokok);
+    console.log(isOlahraga);
+
+    // get the values from the form with DOM. SAVE AS LOCALSTORAGE
+    localStorage.setItem("trayOfInput", JSON.stringify(trayOfInput));
+
+    // SET THE VALUE TO OUR LOGIC IN JS IF WE WANT TO USE SCRIPT ON IT
+    // let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
+    // if (!getUsia) {
+    //   document.getElementById("cek-komplit").classList.remove("d-none");
+    // }
+
+    return trayOfInput;
   }
-
-  if (isOlahraga === "iya") {
-    getOlahraga = true;
-  } else {
-    getOlahraga = false;
-  }
-
-  getUsia = usia;
-
-  console.log(usia);
-  console.log(isAktifMerokok);
-  console.log(isOlahraga);
-
-  // get the values from the form with DOM. SAVE AS LOCALSTORAGE
-  localStorage.setItem("trayOfInput", JSON.stringify(trayOfInput));
-
-  // SET THE VALUE TO OUR LOGIC IN JS IF WE WANT TO USE SCRIPT ON IT
-  // let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
-
-  return trayOfInput;
 }
 
 // cara masukin object ke dalam localstorage
@@ -85,7 +100,11 @@ function stopCount() {
   timer_is_on = 0;
   document.getElementById("txt").value = c - 1;
 
-  data.push(c - 1);
+  if (c === 0) {
+    data.push(c);
+  } else {
+    data.push(c - 1);
+  }
 
   for (let i = 0; i < data.length; i++) {
     if (data[i]) {
