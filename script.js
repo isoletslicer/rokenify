@@ -11,6 +11,15 @@ function changePage(id) {
 }
 
 // Function untuk dapat input
+let isiUsia = false;
+
+function cekUsia() {
+  if (document.getElementById("usia").value === "") {
+    alert("Isi dulu bosku");
+  } else {
+    isiUsia = true;
+  }
+}
 
 let trayOfInput = {};
 let getUsia = "",
@@ -18,38 +27,44 @@ let getUsia = "",
   getOlahraga = "";
 
 function startCheckup() {
-  changePage("data-diri");
+  isiUsia = true;
 
-  let usia = document.getElementById("usia").value;
-  let isAktifMerokok = document.getElementById("is-aktif-merokok").value;
-  let isOlahraga = document.getElementById("is-olahraga").value;
+  if (isiUsia) {
+    changePage("data-diri");
 
-  // coba
-  if (isAktifMerokok === "aktif") {
-    getAktifMerokok = true;
-  } else {
-    getAktifMerokok = false;
+    let usia = document.getElementById("usia").value;
+    let isAktifMerokok = document.getElementById("is-aktif-merokok").value;
+    let isOlahraga = document.getElementById("is-olahraga").value;
+
+    if (isAktifMerokok === "aktif") {
+      getAktifMerokok = true;
+    } else {
+      getAktifMerokok = false;
+    }
+
+    if (isOlahraga === "iya") {
+      getOlahraga = true;
+    } else {
+      getOlahraga = false;
+    }
+
+    getUsia = usia;
+
+    console.log(usia);
+    console.log(isAktifMerokok);
+    console.log(isOlahraga);
+
+    // get the values from the form with DOM. SAVE AS LOCALSTORAGE
+    localStorage.setItem("trayOfInput", JSON.stringify(trayOfInput));
+
+    // SET THE VALUE TO OUR LOGIC IN JS IF WE WANT TO USE SCRIPT ON IT
+    // let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
+    // if (!getUsia) {
+    //   document.getElementById("cek-komplit").classList.remove("d-none");
+    // }
+
+    return trayOfInput;
   }
-
-  if (isOlahraga === "iya") {
-    getOlahraga = true;
-  } else {
-    getOlahraga = false;
-  }
-
-  getUsia = usia;
-
-  console.log(usia);
-  console.log(isAktifMerokok);
-  console.log(isOlahraga);
-
-  // get the values from the form with DOM. SAVE AS LOCALSTORAGE
-  localStorage.setItem("trayOfInput", JSON.stringify(trayOfInput));
-
-  // SET THE VALUE TO OUR LOGIC IN JS IF WE WANT TO USE SCRIPT ON IT
-  // let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
-
-  return trayOfInput;
 }
 
 // cara masukin object ke dalam localstorage
@@ -85,7 +100,11 @@ function stopCount() {
   timer_is_on = 0;
   document.getElementById("txt").value = c - 1;
 
-  data.push(c - 1);
+  if (c === 0) {
+    data.push(c);
+  } else {
+    data.push(c - 1);
+  }
 
   for (let i = 0; i < data.length; i++) {
     if (data[i]) {
@@ -117,95 +136,102 @@ function resetCount() {
 // {"usia":"12","isAktifMerokok":"aktif","isOlahraga":"iya"}
 
 function hitungDanUbah() {
-  changePage("tes-paru");
+  if (data.length === 3) {
+    changePage("tes-paru");
 
-  let kategori = "";
+    let kategori = "";
 
-  if (totalAverage < 20) {
-    // console.log("masuk nih terkecil kategori");
-    kategori = "weak-lungs";
-  } else if (totalAverage < 50) {
-    kategori = "normal-lungs";
-  } else if (totalAverage < 100) {
-    kategori = "strong-lungs";
-  }
-
-  // let dariHTML = document.getElementById("summary-result").innerText;
-
-  if (getUsia < 18) {
-    if (getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "belajar dulu yang bener, jangan ngerokok terus";
-    }
-    if (getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "kurang2in rokok dek, kamu belum lulus SMA";
-    }
-    if (getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "belajar dulu yang bener, biar bisa kerja dan bayar biaya RS";
+    if (totalAverage < 20) {
+      // console.log("masuk nih terkecil kategori");
+      kategori = "weak-lungs";
+    } else if (totalAverage < 50) {
+      kategori = "normal-lungs";
+    } else if (totalAverage < 100) {
+      kategori = "strong-lungs";
     }
 
-    if (getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga";
-    }
-    if (!getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "banyakin olahraga, biar paru2mu kuat dek";
-    }
-    if (!getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "selamat pola hidupmu sehat, masa depan cerah";
-    }
-    if (!getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik";
-    }
-    if (!getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "olahraga dek, jangan main epep terus (kasih foto ambarita polisi)";
-    }
-  }
+    // let dariHTML = document.getElementById("summary-result").innerText;
 
-  if (getUsia >= 18) {
-    document.getElementById("img-result").src = "./img/tretan-muslim.gif";
-    if (getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
-    }
-    if (getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
-      document.getElementById(
-        "summary-result"
-      ).innerText = `olahraga tidak mengurangi resiko merokok. \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
-    }
-    if (getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
-    }
+    if (getUsia < 18) {
+      if (getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "belajar dulu yang bener, jangan ngerokok terus";
+      }
+      if (getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "kurang2in rokok dek, kamu belum lulus SMA";
+      }
+      if (getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "belajar dulu yang bener, biar bisa kerja dan bayar biaya RS";
+      }
 
-    if (getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
-      document.getElementById(
-        "summary-result"
-      ).innerText = `anda dikaruniai paru2 bagus, tetapi \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
-    }
-    if (!getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "banyakin olahraga, biar paru2mu kuat!";
-    }
-    if (!getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "selamat pola hidupmu sehat,semoga umur panjang";
-    }
-    if (!getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "banyakin olahraga bos biar dapat jodoh, umur gaada yang tau!";
+      if (getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga";
+      }
+      if (!getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "banyakin olahraga, biar paru2mu kuat dek";
+      }
+      if (!getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "selamat pola hidupmu sehat, masa depan cerah";
+      }
+      if (!getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik";
+      }
+      if (!getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "olahraga dek, jangan main epep terus (kasih foto ambarita polisi)";
+      }
     }
 
-    if (!getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
-      document.getElementById("summary-result").innerText =
-        "anda dikaruniai paru2 bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram";
+    if (getUsia >= 18) {
+      document.getElementById("img-result").src = "./img/tretan-muslim.gif";
+      if (getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
+      }
+      if (getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
+        document.getElementById(
+          "summary-result"
+        ).innerText = `olahraga tidak mengurangi resiko merokok. \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
+      }
+      if (getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
+      }
+
+      if (getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
+        document.getElementById(
+          "summary-result"
+        ).innerText = `anda dikaruniai paru2 bagus, tetapi \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
+      }
+      if (!getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "banyakin olahraga, biar paru2mu kuat!";
+      }
+      if (!getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "selamat pola hidupmu sehat,semoga umur panjang";
+      }
+      if (!getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "banyakin olahraga bos biar dapat jodoh, umur gaada yang tau!";
+      }
+
+      if (!getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
+        document.getElementById("summary-result").innerText =
+          "anda dikaruniai paru2 bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram";
+      }
     }
+  } else {
+    alert(
+      "Silahkan lakukan pengukuran hingga tiga kali ! cek tabel hasil test diatas"
+    );
+    data = [];
   }
 }
 
