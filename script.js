@@ -10,8 +10,6 @@ function changePage(id) {
   }
 }
 
-function cobaLagi() {}
-
 // Function untuk dapat input
 
 let trayOfInput = {};
@@ -97,6 +95,8 @@ function stopCount() {
       document.getElementById("avg").innerText = totalAverage.toFixed(2);
     }
   }
+
+  resetCount();
 }
 
 function resetCount() {
