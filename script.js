@@ -39,6 +39,8 @@ function startCheckup() {
     getOlahraga = false;
   }
 
+  getUsia = usia;
+
   console.log(usia);
   console.log(isAktifMerokok);
   console.log(isOlahraga);
