@@ -98,14 +98,14 @@
     <!-- Isi-Identitas -->
     <!-- TODO :kalo mau edit utk display valuenya tolong kerjakan ini ya  -->
     <div class="jumbotron d-none" id="data-diri">
-      <img src="./img/logo.png" width="200px" />
-
-      <div class="mb-3">
-        <label for="usia" class="form-label">Usia</label>
-        <input type="number" class="form-control" id="usia" />
+      <img src="./img/logo.png" class="rounded mx-auto d-block" width="200px" />
+      <br />
+      <br />
+      <h4 class="pertanyaan-judul">Usia</h4>
+      <div class="input-group pertanyaan-judul mb-3">
+        <input type="number" class="form-control" id="usia" required />
       </div>
 
-      <br />
       <h4 class="pertanyaan-judul">
         Apakah kamu seorang perokok aktif atau pasif?
       </h4>
@@ -114,7 +114,6 @@
         class="form-select"
         aria-label="Disabled select example"
       >
-        <option selected>Mohon pilih pasif jika anda non-perokok</option>
         <option value="aktif">Aktif</option>
         <option value="pasif">Pasif</option>
       </select>
@@ -126,12 +125,20 @@
         class="form-select"
         aria-label="Disabled select example"
       >
-        <option selected>Pilih yang jujur ya, kalo bohong berdosa</option>
         <option value="iya">Iya</option>
         <option value="tidak">Tidak</option>
       </select>
 
-      <a class="btn btn-danger" onclick="startCheckup()"> Submit & Go! </a>
+      <br />
+      <br />
+      <div class="text-center">
+        <a class="btn btn-danger rounded mx-auto" onclick="startCheckup()">
+          Submit & Go!
+        </a>
+      </div>
+      <!-- <a class="btn btn-danger rounded mx-auto" onclick="startCheckup()">
+        Submit & Go!
+      </a> -->
     </div>
     <!-- /Isi-Identitas-->
 
@@ -199,18 +206,18 @@
       </button>
       <button
         type="button"
-        class="btn btn-primary btn-circle btn-lg stop-button"
+        class="btn btn-danger btn-circle btn-lg stop-button"
         onclick="stopCount()"
       >
         Stop
       </button>
-      <button
+      <!-- <button
         type="button"
         class="btn btn-danger btn-circle btn-lg reset-button"
         onclick="resetCount()"
       >
         Reset
-      </button>
+      </button> -->
       <button
         type="button"
         class="btn btn-secondary btn-circle btn-lg next-button"
@@ -235,14 +242,17 @@
         adipisci minus doloremque.
       </p>
       <br />
-      <img src="./img/ambarita.gif" width="300px" />
+      <img id="img-result" src="./img/ambarita.gif" width="300px" />
       <br />
-      <a class="btn btn-danger" onclick="cobaLagi()"> Coba lagi </a>
-      <input
+      <br />
+      <a class="btn btn-danger" onClick="window.location.reload(true)">
+        Coba lagi
+      </a>
+      <!-- <input
         type="button"
         value="Reload Page"
         onClick="window.location.reload(true)"
-      />
+      /> -->
     </div>
 
     <!-- /Hasil -->
