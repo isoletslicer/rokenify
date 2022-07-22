@@ -28,11 +28,11 @@
   <body>
     <!-- Navbar -->
     <nav
-      class="navbar navbar-expand-lg"
+      class="navbar navbar-expand-lg shadow-sm"
       style="background-color: rgb(70, 215, 206)"
     >
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Rokenify</a>
+        <a class="navbar-brand text-white fw-normal" href="#">Rokenify</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -47,7 +47,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">About</a>
+              <a
+                class="nav-link active text-white fw-normal"
+                aria-current="page"
+                href="#"
+                >About</a
+              >
             </li>
           </ul>
         </div>
@@ -56,9 +61,11 @@
     <!-- /Navbar -->
 
     <!-- Content -->
-    <div class="jumbotron text-white jumbotron-image shadow text-center">
-      <!-- <h2 class="title">Welcome to Rokenify Lung Checker</h2> -->
-      <img src="./img/logo.png" width="200px" />
+    <div
+      class="jumbotron text-white shadow-sm text-center max-height: 100%"
+      id="homepage"
+    >
+      <img src="./img/logo.png" class="text-center" width="200px" />
 
       <div class="container">
         <div class="row">
@@ -69,7 +76,8 @@
           <div class="col-6 text-justify">
             Berdasarkan laporan Kualitas Udara Dunia IQAir 2021 pada Maret 2022,
             Indonesia menempati peringkat teratas sebagai negara paling polusi
-            di dunia dengan konsentrasi PM2,5 tertinggi yakni 34,3 μg/m3. <br />
+            di dunia dengan konsentrasi PM 2,5 tertinggi yakni 34,3 μg/m3.
+            <br />
             <br />
             Indonesia juga mendapatkan peringkat pertama di Asia Tenggara
             sebagai negara yang berpolusi udara. Selain itu, Indonesia juga
@@ -80,56 +88,67 @@
           </div>
         </div>
       </div>
-      <br>
-      <a class="btn btn-lg btn-danger"> Kuy dimulai! </a>
+      <br />
+      <a class="btn btn-lg btn-danger" onclick="changePage('homepage')">
+        Kuy dimulai!
+      </a>
     </div>
     <!-- /Content -->
 
     <!-- Isi-Identitas -->
     <!-- TODO :kalo mau edit utk display valuenya tolong kerjakan ini ya  -->
-    <div class="jumbotron jumbotron-image ">
-    <form>
+    <div class="jumbotron d-none" id="data-diri">
+      <img src="./img/logo.png" width="200px" />
+
       <div class="mb-3">
         <label for="usia" class="form-label">Usia</label>
-        <input type="email" class="form-control" id="usia" />
+        <input type="number" class="form-control" id="usia" />
       </div>
 
-      <h4 class="pertanyaan-judul">Apakah kamu seorang perokok aktif atau pasif?</h4>
-      <select class="form-select" aria-label="Disabled select example">
-        <option class="dropdown-judul" >Mohon pilih salah satu!</option>
+      <br />
+      <h4 class="pertanyaan-judul">
+        Apakah kamu seorang perokok aktif atau pasif?
+      </h4>
+      <select
+        id="is-aktif-merokok"
+        class="form-select"
+        aria-label="Disabled select example"
+      >
+        <option selected>Mohon pilih pasif jika anda non-perokok</option>
         <option value="aktif">Aktif</option>
-        <option value="Pasif">Pasif</option>
+        <option value="pasif">Pasif</option>
       </select>
 
-      <br>
-      <h4 class="pertanyaan-judul">Apakah kamu mengkonsumsi rokok batangan atau vape?</h4>
-      <select class="form-select" aria-label="Disabled select example">
-        <option class="dropdown-judul">Mohon pilih salah satu!</option>
-        <option value="batangan">Rokok batangan</option>
-        <option value="Vape">Vape</option>
-      </select>
-
+      <br />
       <h4 class="pertanyaan-judul">Apakah kamu suka olahraga?</h4>
-      <select class="form-select" aria-label="Disabled select example">
-        <option class="dropdown-judul">Mohon pilih salah satu!</option>
+      <select
+        id="is-olahraga"
+        class="form-select"
+        aria-label="Disabled select example"
+      >
+        <option selected>Pilih yang jujur ya, kalo bohong berdosa</option>
         <option value="iya">Iya</option>
-        <option value="Tidak">Tidak</option>
+        <option value="tidak">Tidak</option>
       </select>
 
-    <a class="btn btn-danger"> Submit & Go! </a>
-  </div>
+      <a class="btn btn-danger" onclick="startCheckup()"> Submit & Go! </a>
+    </div>
     <!-- /Isi-Identitas-->
 
     <!-- Tes-Paru-Paru -->
-    <div class="jumbotron text-black jumbotron-image shadow text-center">
+    <div
+      class="jumbotron text-black shadow-sm text-center d-none"
+      id="tes-paru"
+    >
+      <img src="./img/logo.png" width="200px" />
       <h1>TEST INI DIJALANKAN 3X</h1>
       <div class="row">
         <div class="col">
-             <iframe width="560" height="315" src="https://www.youtube.com/embed/F9O63rjSpFo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <img src="./img/kapasitas-paru.png" width="700px" />
         </div>
         <div class="col">
           <h3>Hasil Test</h3>
-          <table class="table">
+          <table class="table table-bordered">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -156,39 +175,93 @@
             </tbody>
           </table>
         </div>
-        <br>
-
+        <br />
       </div>
 
       <!-- <div class="progress">
         <div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
       </div> -->
 
-     
-
-     
-
       <!-- <input type="button" value="Start count!" onclick="doTimer()" />
       <input type="button" value="Stop count!" onclick="stopCount()" />
       <input type="button" value="Reset count!" onclick="resetCount()" /> -->
       <input type="text" id="txt" />
-      <br>
-      <br>
-      
-       <!-- Button start, finish, reset -->
-       <button type="button" class="btn btn-primary btn-circle btn-lg start-button" onclick="doTimer()">Start</button>
-       <button type="button" class="btn btn-primary btn-circle btn-lg stop-button" onclick="stopCount()">Stop</button>
-       <button type="button" class="btn btn-danger btn-circle btn-lg reset-button" onclick="resetCount()">Reset</button>
+      <br />
+      <br />
 
+      <!-- Button start, finish, reset -->
+      <button
+        type="button"
+        class="btn btn-primary btn-circle btn-lg start-button"
+        onclick="doTimer()"
+      >
+        Start
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-circle btn-lg stop-button"
+        onclick="stopCount()"
+      >
+        Stop
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger btn-circle btn-lg reset-button"
+        onclick="resetCount()"
+      >
+        Reset
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary btn-circle btn-lg next-button"
+        onclick="hitungDanUbah()"
+      >
+        Next
+      </button>
+    </div>
     <!-- /Tes-Paru-Paru -->
 
+    <!-- Hasil -->
+    <div class="jumbotron result-all d-none text-center" id="result-final">
+      <img src="./img/logo.png" width="200px" />
+      <h1>Result</h1>
+      <br />
+      <p id="summary-result">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque quod,
+        aliquam hic distinctio placeat consequatur. Enim doloremque unde eos,
+        quas quia cumque vitae! Suscipit veniam, ipsum quaerat aspernatur eius
+        quo esse perspiciatis sit necessitatibus. Perspiciatis id laboriosam aut
+        saepe natus incidunt illo obcaecati aperiam nisi mollitia, aliquam,
+        adipisci minus doloremque.
+      </p>
+      <br />
+      <img src="./img/ambarita.gif" width="300px" />
+      <br />
+      <a class="btn btn-danger" onclick="cobaLagi()"> Coba lagi </a>
+      <input
+        type="button"
+        value="Reload Page"
+        onClick="window.location.reload(true)"
+      />
+    </div>
+
+    <!-- /Hasil -->
+
+    <!-- Footer -->
+    <div>
+      <footer class="d-block text-center">
+        <p class="fw-normal text-white">Rokenify 2022</p>
+      </footer>
+    </div>
+    <!-- /Footer -->
+
     <script src="./script.js">
-      // // cara masukin object ke dalam localstorage
+      // cara masukin object ke dalam localstorage
+      // ! JANGAN DIHAPUS
       // let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       // localStorage.setItem("arr", JSON.stringify(arr));
       // // parsing aja
       // let arr2 = JSON.parse(localStorage.getItem("arr"));
-
     </script>
   </body>
 </html>

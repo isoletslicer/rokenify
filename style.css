@@ -12,6 +12,11 @@ button {
   font-size: 18pt;
 }
 
+footer {
+  background-color: rgb(70, 215, 206);
+  width: auto;
+}
+
 .container {
   color: black;
   font-size: 16pt;
@@ -20,6 +25,7 @@ button {
 .jumbotron {
   padding: 2rem 1rem;
   background-color: #fff;
+  height: auto;
 }
 
 .text-justify {
