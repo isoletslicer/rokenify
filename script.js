@@ -1,3 +1,17 @@
+// Function untuk ganti halaman
+let pagesId = ["homepage", "data-diri", "tes-paru", "result-final"];
+
+function changePage(id) {
+  for (let i = 0; i < pagesId.length; i++) {
+    if (id === pagesId[i]) {
+      document.getElementById(pagesId[i]).classList.add("d-none");
+      document.getElementById(pagesId[i + 1]).classList.remove("d-none");
+    }
+  }
+}
+
+function cobaLagi() {}
+
 // Function untuk dapat input
 
 let trayOfInput = {};
@@ -6,6 +20,8 @@ let getUsia = "",
   getOlahraga = "";
 
 function startCheckup() {
+  changePage("data-diri");
+
   let usia = document.getElementById("usia").value;
   let isAktifMerokok = document.getElementById("is-aktif-merokok").value;
   let isOlahraga = document.getElementById("is-olahraga").value;
@@ -130,6 +146,8 @@ function resetCount() {
 // TODO : COBA KAITIN INI KE DOM HTML NYA. PNJNG EMANG
 
 function hitungDanUbah() {
+  changePage("tes-paru");
+
   let kategori = "";
 
   if (totalAverage < 20) {
