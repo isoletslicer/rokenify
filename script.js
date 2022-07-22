@@ -57,21 +57,9 @@ function startCheckup() {
     // get the values from the form with DOM. SAVE AS LOCALSTORAGE
     localStorage.setItem("trayOfInput", JSON.stringify(trayOfInput));
 
-    // SET THE VALUE TO OUR LOGIC IN JS IF WE WANT TO USE SCRIPT ON IT
-    // let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
-    // if (!getUsia) {
-    //   document.getElementById("cek-komplit").classList.remove("d-none");
-    // }
-
     return trayOfInput;
   }
 }
-
-// cara masukin object ke dalam localstorage
-// let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-// parsing aja
-// SET THE VALUE TO OUR LOGIC IN JS IF WE WANT TO USE SCRIPT ON IT
-// let queryTray = JSON.parse(localStorage.getItem("trayOfInput"));
 
 // Function untuk counter waktu
 var c = 0;
@@ -123,18 +111,6 @@ function resetCount() {
   document.getElementById("txt").value = c;
 }
 
-// Kategori:
-// 0-2 = kalau perokok => return id: weak-lungs & message: "Dikurangi rokoknya ya guys"
-// 0-2 = tidak olahraga => return id: do-more-sports & message: "Ayuk olahraga "
-
-// 2-5 = kalau perokok => return id: normal-lungs & message: "Dikurangi rokoknya ya guys"
-// 2-5 = tidak olahraga => return id: do-more-sports & message: "Ayuk olahraga "
-
-// 5-10 = kalau perokok => return id: strong-lungs & message: "Paru-paru kamu sehat tuh"
-// 5-10 = tidak olahraga => return id: do-more-sports & message: "Ayuk olahraga"
-
-// {"usia":"12","isAktifMerokok":"aktif","isOlahraga":"iya"}
-
 function hitungDanUbah() {
   if (data.length === 3) {
     changePage("tes-paru");
@@ -142,7 +118,6 @@ function hitungDanUbah() {
     let kategori = "";
 
     if (totalAverage < 20) {
-      // console.log("masuk nih terkecil kategori");
       kategori = "weak-lungs";
     } else if (totalAverage < 50) {
       kategori = "normal-lungs";
@@ -150,41 +125,39 @@ function hitungDanUbah() {
       kategori = "strong-lungs";
     }
 
-    // let dariHTML = document.getElementById("summary-result").innerText;
-
     if (getUsia < 18) {
       if (getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "belajar dulu yang bener, jangan ngerokok terus";
+          "Belajar dulu yang bener, jangan ngerokok terus!";
       }
       if (getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "kurang2in rokok dek, kamu belum lulus SMA";
+          "Kurang-kurangin rokok dek, kamu belum lulus SMA";
       }
       if (getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "belajar dulu yang bener, biar bisa kerja dan bayar biaya RS";
+          "Belajar dulu yang bener, biar bisa kerja dan bayar biaya RS";
       }
 
       if (getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga";
+          "Kurang-kurangin rokok dek, kamu belum lulus SMA, perbanyak olahraga";
       }
       if (!getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "banyakin olahraga, biar paru2mu kuat dek";
+          "Banyakin olahraga, biar paru-parumu kuat dek";
       }
       if (!getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "selamat pola hidupmu sehat, masa depan cerah";
+          "Selamat pola hidupmu sehat, masa depan cerah";
       }
       if (!getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik";
+          "Pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik";
       }
       if (!getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "olahraga dek, jangan main epep terus (kasih foto ambarita polisi)";
+          "Olahraga dek, jangan main epep terus";
       }
     }
 
@@ -197,7 +170,7 @@ function hitungDanUbah() {
       if (getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
         document.getElementById(
           "summary-result"
-        ).innerText = `olahraga tidak mengurangi resiko merokok. \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
+        ).innerText = `Olahraga tidak mengurangi resiko merokok. \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
       }
       if (getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
         document.getElementById("summary-result").innerText =
@@ -207,35 +180,35 @@ function hitungDanUbah() {
       if (getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
         document.getElementById(
           "summary-result"
-        ).innerText = `anda dikaruniai paru2 bagus, tetapi \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
+        ).innerText = `Anda dikaruniai paru-paru bagus, tetapi \n MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT`;
       }
       if (!getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "banyakin olahraga, biar paru2mu kuat!";
+          "Perbanyak olahraga, biar paru-parumu kuat!";
       }
       if (!getAktifMerokok && getOlahraga && kategori !== "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "selamat pola hidupmu sehat,semoga umur panjang";
+          "Selamat pola hidupmu sehat, semoga umur panjang";
       }
       if (!getAktifMerokok && !getOlahraga && kategori === "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "banyakin olahraga bos biar dapat jodoh, umur gaada yang tau!";
+          "Perbanyak olahraga bos biar dapat jodoh, umur gaada yang tau!";
       }
 
       if (!getAktifMerokok && !getOlahraga && kategori !== "weak-lungs") {
         document.getElementById("summary-result").innerText =
-          "anda dikaruniai paru2 bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram";
+          "Anda dikaruniai paru-paru bagus, tapi sebaiknya olahraga ya biar tambah sehat, kuat, aman, dan tentram";
       }
     }
   } else {
     alert(
-      "Silahkan lakukan pengukuran hingga tiga kali ! cek tabel hasil test diatas"
+      "Silahkan lakukan pengukuran hingga tiga kali! Cek tabel hasil test di atas,"
     );
     data = [];
   }
 }
 
-// kondisi:
+// Kondisi:
 // USIA < 18
 // perokok && sport && weak => 'belajar dulu yang bener, jangan ngerokok terus'
 // perokok && sport && normal/strong => 'kurang2in rokok dek, kamu belum lulus SMA'
@@ -243,7 +216,7 @@ function hitungDanUbah() {
 // perokok && non-sport && normal/strong => 'kurang2in rokok dek, kamu belum lulus SMA, banyakin olahraga' -CLEAR
 
 // bukan perokok && sport && normal/strong => 'selamat pola hidupmu sehat, masa depan cerah'
-// bukan perokok && sport && weak => 'banyakin olahraga, biar paru2mu kuat dek!'
+// bukan perokok && sport && weak => 'banyakin olahraga, biar paru-parumu kuat dek!'
 // bukan perokok && non-sport && weak => 'olahraga dek, jangan main epep terus (kasih foto ambarita polisi)'
 // bukan perokok && non-sport && normal/strong => 'pertahankan gaya hidupmu dik, jangan coba2 rokok, olahraga lah dik' -CLEAR
 
@@ -251,9 +224,9 @@ function hitungDanUbah() {
 // perokok && sport && weak => 'merokok dapat menyebabkan (tretan muslim)'
 // perokok && non-sport && weak => 'merokok dapat menyebabkan (tretan muslim)'
 // perokok && sport && normal/strong => 'olahraga tidak mengurangi resiko merokok (tretan muslim)'
-// perokok && non-sport && normal/strong => 'anda dikaruniai paru2 bagus, tetapi merokok dapat dapat menyebabkan (tretan muslim)'
+// perokok && non-sport && normal/strong => 'anda dikaruniai paru-paru bagus, tetapi merokok dapat dapat menyebabkan (tretan muslim)'
 
 // bukan perokok && sport && normal/strong => 'selamat pola hidupmu sehat,semoga umur panjang'
-// bukan perokok && sport && weak => 'banyakin olahraga, biar paru2mu kuat!'
+// bukan perokok && sport && weak => 'banyakin olahraga, biar paru-parumu kuat!'
 // bukan perokok && non-sport && weak => 'banyakin olahraga bos biar dapat jodoh, umur gaada yang tau!'
-// bukan perokok && non-sport && normal/strong => 'anda dikaruniai paru2 bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram'
+// bukan perokok && non-sport && normal/strong => 'anda dikaruniai paru-paru bagus, tapi sebaiknya olahraga biar tambah sehat, kuat, aman, dan tentram'
