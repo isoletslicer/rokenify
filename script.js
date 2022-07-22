@@ -169,6 +169,7 @@ function hitungDanUbah() {
   }
 
   if (getUsia >= 18) {
+    document.getElementById("img-result").src = "./img/tretan-muslim.gif";
     if (getAktifMerokok && getOlahraga && kategori === "weak-lungs") {
       document.getElementById("summary-result").innerText =
         "MEROKOK DAPAT MENYEBABKAN OPERASI JANTUNG & PARU RP 500 JT, TAHLIHAN RP 10 JT, 40 HARI RP 3 JT";
