@@ -43,3 +43,8 @@ footer {
   font-size: medium;
   color: black;
 }
+
+p.indent {
+  text-indent: 30px;
+  font-size: 12pt;
+}

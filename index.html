@@ -32,7 +32,9 @@
       style="background-color: rgb(70, 215, 206)"
     >
       <div class="container-fluid">
-        <a class="navbar-brand text-white fw-normal" href="#">Rokenify</a>
+        <a class="navbar-brand text-white fw-normal" href="./index.html"
+          >Rokenify</a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -50,7 +52,7 @@
               <a
                 class="nav-link active text-white fw-normal"
                 aria-current="page"
-                href="#"
+                href="./about.html"
                 >About</a
               >
             </li>
@@ -140,6 +142,11 @@
       </select>
 
       <br />
+
+      <h4 id="cek-komplit" class="pertanyaan-judul text-danger d-none">
+        Silahkan masukkan usia anda!
+      </h4>
+
       <br />
       <div class="text-center">
         <a class="btn btn-danger rounded mx-auto" onclick="startCheckup()">
@@ -159,13 +166,20 @@
     >
       <img src="./img/logo.png" width="200px" />
       <h1>TEST INI DIJALANKAN 3X</h1>
+      <h3>
+        Instruksi: <br />1. Silahkan tekan start, jika anda akan memulai. <br />
+        2. Ketika tombol start telah ditekan, maka anda harus menahan nafas
+        anda. <br />
+        3. Saat anda sudah tidak tahan lagi, maka anda segera menekan tombol
+        stop
+      </h3>
       <div class="row">
         <div class="col">
           <img src="./img/kapasitas-paru.png" width="700px" />
         </div>
         <div class="col">
           <h3>Hasil Test</h3>
-          <table class="table table-bordered">
+          <table class="table table-bordered w-auto m-auto">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
@@ -270,7 +284,7 @@
     <!-- Footer -->
     <div>
       <footer class="d-block text-center">
-        <p class="fw-normal text-white">Rokenify 2022</p>
+        <p class="fs-6 text-white">© Rokenify 2022</p>
       </footer>
     </div>
     <!-- /Footer -->
